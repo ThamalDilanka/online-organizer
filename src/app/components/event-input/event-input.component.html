@@ -1,0 +1,35 @@
+<div class="no-padding container">
+    <div class="input-container d-flex bd-highlight">
+
+        <div class="input-title p-2 flex-grow-1 bd-highlight">
+            <input [(ngModel)]="eventTitle" type="text" name="eventTitle" placeholder="Event Title">
+        </div>
+
+        <div class="no-margin-padding input-hours p-2 bd-highlight" >
+            <input [(ngModel)]="eventHour" type="text" name="eventHour" placeholder="HH" maxlength="2">
+        </div>
+
+        <div class="no-margin-padding p-2 bd-highlight">
+            <p>:</p>
+        </div>
+
+        <div class="no-margin-padding input-minutes p-2 bd-highlight">
+            <input [(ngModel)]="eventMinute" type="text" name="eventMinute" placeholder="MM" maxlength="2"> 
+        </div>
+
+        <div class="no-margin-padding p-2 bd-highlight">
+            <div class="no-margin-padding time-stamp btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-info btn-sm">
+                  <input (click)="onTimeSpanChange('AM')" type="radio" name="options" id="am" checked> AM
+                </label>
+                <label class="btn btn-info btn-sm">
+                  <input (click)="onTimeSpanChange('PM')" type="radio" name="options" id="pm"> PM
+                </label>
+            </div>
+        </div>
+
+        <div class="no-margin-padding input-minutes p-2 bd-highlight">
+            <button (click)="onSubmit()" class="btn-add btn btn-primary">+</button>
+        </div>
+    </div>
+</div>

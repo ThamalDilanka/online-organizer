@@ -1,0 +1,4 @@
+<div class="no-padding container">
+    <app-event-item *ngFor="let e of events" [event]="e" (deleteEvent)="onDelete($event)"></app-event-item>
+</div>
+

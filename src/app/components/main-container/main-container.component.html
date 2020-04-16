@@ -1,0 +1,18 @@
+<div class="container-lg">
+    <app-event-input [selectedDate]="selectedDate" (addNewEvent)="addNewEvent($event)"></app-event-input>
+    <div class="row">
+        <div class="calendar-container col-md-4">
+            <h5>Calendar</h5>
+            <app-calendar  (dateChangeEvent)="onSelectedDateChange($event)"></app-calendar>
+        </div>
+        <div class="col-md-8">
+            <h5>Events</h5>
+            <app-events [events]="events" (deleteEvent)="deleteEvent($event)"></app-events>
+        </div>
+    </div>
+</div>
+
+
+
+
+

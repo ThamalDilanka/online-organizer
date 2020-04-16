@@ -1,0 +1,6 @@
+<ngb-datepicker
+  #dp
+  [(ngModel)]="selectedDate"
+  (navigate)="date = $event.next"
+  (click)="onSelectedDateChange()"
+></ngb-datepicker>

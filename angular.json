@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "online-organizer"
+    }
+  },
+  "defaultProject": "online-organizer",
+  "cli": {
+    "analytics": false
+  }
 }

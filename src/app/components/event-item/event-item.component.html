@@ -1,0 +1,13 @@
+<div class="app-event-item-card d-flex bd-highlight">
+    <div class="no-padding app-event-item-date-container p-2 bd-highlight">
+        <p class="date-number">12</p>
+        <p>{{eventMonth}}</p>
+    </div>
+    <div class="app-event-item-detail-container p-2 flex-grow-1 bd-highlight">
+        <p class="event-title">{{event.title}}</p>
+        <p class="event-date-time">{{eventDate}} | {{event.time}}</p>
+        <p class="relative-time">{{eventRelativeTime}}</p>
+        <button class="event-card-btn-update event-card-btn btn btn-outline-info"><i class="fa fa-edit"></i></button>
+        <button (click)="onDelete(event)" class="event-card-btn-delete event-card-btn btn btn-outline-danger"><i class="fa fa-times"></i></button>
+    </div>
+</div>
