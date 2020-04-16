@@ -38,11 +38,14 @@ export class MainContainerComponent implements OnInit {
 
   addNewEvent(event: Event) {
     this.events.push(event);
-    console.log(event);
   }
 
   deleteEvent(event: Event) {
-    this.events = this.events.filter(e => e.id !== event.id);
-    console.log(this.events);
+    this.events = this.events.filter((e) => e.id !== event.id);
+  }
+
+  updateEvent(event: Event) {
+    //this.deleteEvent(event);
+    this.addNewEvent(event);
   }
 }

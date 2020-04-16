@@ -11,11 +11,12 @@ export class EventItemComponent implements OnInit {
   
   @Input() event: Event;
   @Output() deleteEvent: EventEmitter<Event> = new EventEmitter();
+  @Output() updateEvent: EventEmitter<Event> = new EventEmitter();
 
   eventDate: string;
   eventRelativeTime: string;
   eventMonth: string;
-  eventDay: number;
+  eventDay: string;
 
   constructor() {}
 
@@ -24,9 +25,16 @@ export class EventItemComponent implements OnInit {
     this.eventDate = momentDate.format('MMMM Do YYYY');
     this.eventRelativeTime = momentDate.fromNow();
     this.eventMonth = this.eventDate.split(' ')[0];
+    this.eventDay = this.eventDate.split(' ')[1].slice(0, 2);;
   }
 
-  onDelete(event: Event) {
-    this.deleteEvent.emit(event);
+  onDelete() {
+    this.deleteEvent.emit(this.event);
   }
+
+  onUpdate() {
+    const updatedEvent = new Event('', '', '', '');
+    this.updateEvent.emit(updatedEvent);
+  }
+
 }

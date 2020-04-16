@@ -10,6 +10,8 @@ export class EventsComponent implements OnInit {
 
   @Input() events: Event[];
   @Output() deleteEvent: EventEmitter<Event> = new EventEmitter();
+  @Output() updateEvent: EventEmitter<Event> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -17,6 +19,10 @@ export class EventsComponent implements OnInit {
 
   onDelete(event: Event) {
     this.deleteEvent.emit(event);
+  }
+
+  onUpdate(event: Event) {
+    this.updateEvent.emit(event);
   }
 
 }
