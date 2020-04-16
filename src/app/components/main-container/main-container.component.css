@@ -3,3 +3,8 @@
     text-align: center;
     }
 }
+
+.main-container {
+    background: #fff;
+    min-height: 110%;
+}
