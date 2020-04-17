@@ -4,7 +4,10 @@
     <div class="row">
         <div class="calendar-container col-md-4">
             <h5>Calendar</h5>
-            <app-calendar  (dateChangeEvent)="onSelectedDateChange($event)"></app-calendar>
+            <div class="no-padding no-margin calendar-fit">
+                <app-calendar  (dateChangeEvent)="onSelectedDateChange($event)"></app-calendar>
+            </div>
+            
         </div>
         <div class="col-md-8">
             <h5>Events</h5>

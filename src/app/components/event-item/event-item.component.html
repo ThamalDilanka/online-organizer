@@ -1,27 +1,37 @@
 <div>
-  
-<div class="app-event-item-card d-flex bd-highlight">
-  <div class="no-padding app-event-item-date-container p-2 bd-highlight">
-    <p class="date-number">{{ eventDay }}</p>
-    <p>{{ eventMonth }}</p>
-  </div>
-  <div class="app-event-item-detail-container p-2 flex-grow-1 bd-highlight">
-    <p class="event-title">{{ event.title }}</p>
-    <p class="event-date-time">{{ eventDate }} | {{ event.time }}</p>
-    <p class="relative-time">{{ eventRelativeTime }}</p>
-    <button
-      (click)="onUpdate()"
-      class="event-card-btn-update event-card-btn btn btn-outline-info"
-      data-toggle="modal"
-      data-target="#updateEventModal"
-    >
-      <i class="fa fa-edit"></i>
-    </button>
-    <button
-      (click)="onDelete(event)"
-      class="event-card-btn-delete event-card-btn btn btn-outline-danger"
-    >
-      <i class="fa fa-times"></i>
-    </button>
+  <div class="app-event-item-card d-flex bd-highlight">
+
+    <div *ngIf="isDeletePressed">
+      <div class="on-delete-background"></div>
+      <div class="on-delete-dialog">
+        <p>Are you really want to delete this event?</p>
+        <button (click)="onCancelDeletePress()" class="btn btn-secondary btn-sm">Cancel</button>
+        <button (click)="onDelete(event)" class="btn btn-danger btn-sm">Delete</button>
+      </div>
+    </div>
+
+    <div class="no-padding app-event-item-date-container p-2 bd-highlight">
+      <p class="date-number">{{ eventDay }}</p>
+      <p>{{ eventMonth }}</p>
+    </div>
+    <div class="app-event-item-detail-container p-2 flex-grow-1 bd-highlight">
+      <p class="event-title">{{ event.title }}</p>
+      <p class="event-date-time">{{ eventDate }} | {{ event.time }}</p>
+      <p class="relative-time">{{ eventRelativeTime }}</p>
+      <button
+        (click)="onUpdate()"
+        class="event-card-btn-update event-card-btn btn btn-outline-info"
+        data-toggle="modal"
+        data-target="#updateEventModal"
+      >
+        <i class="fa fa-edit"></i>
+      </button>
+      <button
+        (click)="onDeletePress()"
+        class="event-card-btn-delete event-card-btn btn btn-outline-danger"
+      >
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
   </div>
 </div>

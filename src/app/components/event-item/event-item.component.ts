@@ -18,6 +18,8 @@ export class EventItemComponent implements OnInit {
   eventMonth: string;
   eventDay: string;
 
+  isDeletePressed: boolean;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -26,6 +28,14 @@ export class EventItemComponent implements OnInit {
     this.eventRelativeTime = momentDate.fromNow();
     this.eventMonth = this.eventDate.split(' ')[0];
     this.eventDay = this.eventDate.split(' ')[1].slice(0, 2);;
+  }
+
+  onDeletePress() {
+    this.isDeletePressed = true;
+  }
+
+  onCancelDeletePress() {
+    this.isDeletePressed = false;
   }
 
   onDelete(event: Event) {
