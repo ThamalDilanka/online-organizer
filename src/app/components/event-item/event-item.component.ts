@@ -8,7 +8,6 @@ import * as moment from 'moment';
   styleUrls: ['./event-item.component.css'],
 })
 export class EventItemComponent implements OnInit {
-  
   @Input() event: Event;
   @Output() deleteEvent: EventEmitter<Event> = new EventEmitter();
   @Output() updateEvent: EventEmitter<Event> = new EventEmitter();
@@ -23,11 +22,14 @@ export class EventItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    const momentDate = moment(this.event.date, 'YYYY-MM-DD')
+    const momentDate = moment(this.event.date, 'YYYY-MM-DD');
     this.eventDate = momentDate.format('MMMM Do YYYY');
     this.eventRelativeTime = momentDate.fromNow();
     this.eventMonth = this.eventDate.split(' ')[0];
-    this.eventDay = this.eventDate.split(' ')[1].slice(0, 2);;
+    this.eventDay = this.eventDate
+      .split(' ')[1]
+      .slice(0, 2)
+      .replace(/[snrt]/g, '');
   }
 
   onDeletePress() {
@@ -45,5 +47,4 @@ export class EventItemComponent implements OnInit {
   onUpdate(event: Event) {
     this.updateEvent.emit(event);
   }
-
 }

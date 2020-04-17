@@ -5,6 +5,7 @@ import * as moment from 'moment';
 
 declare function disableScroll(): any;
 declare function enableScroll(): any;
+declare function getUpdatedDate(): any;
 @Component({
   selector: 'app-main-container',
   templateUrl: './main-container.component.html',
@@ -77,6 +78,7 @@ export class MainContainerComponent implements OnInit {
   }
 
   updateTheEvent() {
+    getUpdatedDate();
     if (
       (this.eventToBeUpdated.title && this.eventToBeUpdatedHH,
       this.eventToBeUpdatedMM,
@@ -86,15 +88,14 @@ export class MainContainerComponent implements OnInit {
       const updatedEvent = new Event(
         '-',
         this.eventToBeUpdated.title,
-        this.eventToBeUpdated.date,
+        getUpdatedDate(),
         `${this.eventToBeUpdatedHH}:${this.eventToBeUpdatedMM} ${this.eventToBeUpdatedTS}`
       );
 
-      this.events = this.events.map(event => {
-        if(event.id === this.eventToBeUpdated.id) {
+      this.events = this.events.map((event) => {
+        if (event.id === this.eventToBeUpdated.id) {
           return updatedEvent;
-        }
-        else {
+        } else {
           return event;
         }
       });

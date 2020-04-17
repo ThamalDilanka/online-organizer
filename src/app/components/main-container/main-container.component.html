@@ -7,16 +7,35 @@
     <h4>Update</h4>
     <div class="input-container d-flex bd-highlight">
       <div class="p-2 flex-grow-1 bd-highlight">
-        <input [(ngModel)]="eventToBeUpdated.title" type="text" name="eventTitle" placeholder="Event Title" maxlength="45"/>
+        <input
+          [(ngModel)]="eventToBeUpdated.title"
+          type="text"
+          name="eventTitle"
+          placeholder="Event Title"
+          maxlength="45"
+        />
       </div>
     </div>
     <div class="input-container d-flex bd-highlight">
       <div class="input-title p-2 bd-highlight">
-        <input type="date" name="eventDate" value={{eventToBeUpdated.date}} min="2018-01-01" max="2030-12-31"/>
+        <input
+          id="update-event-date"
+          type="date"
+          name="eventDate"
+          value="{{ eventToBeUpdated.date }}"
+          min="2018-01-01"
+          max="2030-12-31"
+        />
       </div>
 
       <div class="no-margin-padding input-hours p-2 bd-highlight">
-        <input [(ngModel)]="eventToBeUpdatedHH" type="text" name="eventTitle" placeholder="HH" maxlength="2" />
+        <input
+          [(ngModel)]="eventToBeUpdatedHH"
+          type="text"
+          name="eventTitle"
+          placeholder="HH"
+          maxlength="2"
+        />
       </div>
 
       <div class="no-margin-padding p-2 bd-highlight">
@@ -24,7 +43,13 @@
       </div>
 
       <div class="no-margin-padding input-minutes p-2 bd-highlight">
-        <input [(ngModel)]="eventToBeUpdatedMM" type="text" name="eventTitle" placeholder="MM" maxlength="2" />
+        <input
+          [(ngModel)]="eventToBeUpdatedMM"
+          type="text"
+          name="eventTitle"
+          placeholder="MM"
+          maxlength="2"
+        />
       </div>
 
       <div class="no-margin-padding p-2 bd-highlight">
@@ -33,17 +58,33 @@
           data-toggle="buttons"
         >
           <label class="btn btn-info btn-sm">
-            <input (click)="onTimeSpanChange('AM')" type="radio" name="options" id="option1" /> AM
+            <input
+              (click)="onTimeSpanChange('AM')"
+              type="radio"
+              name="options"
+              id="option1"
+            />
+            AM
           </label>
           <label class="btn btn-info btn-sm">
-            <input (click)="onTimeSpanChange('PM')"type="radio" name="options" id="option2" /> PM
+            <input
+              (click)="onTimeSpanChange('PM')"
+              type="radio"
+              name="options"
+              id="option2"
+            />
+            PM
           </label>
         </div>
       </div>
     </div>
     <div class="update-btn-container">
-      <button (click)="cancelUpdate()" class="btn btn-secondary btn-sm">Discard</button>
-      <button (click)="updateTheEvent()" class="btn btn-info btn-sm">Update</button>
+      <button (click)="cancelUpdate()" class="btn btn-secondary btn-sm">
+        Discard
+      </button>
+      <button (click)="updateTheEvent()" class="btn btn-info btn-sm">
+        Update
+      </button>
     </div>
   </div>
 </div>
