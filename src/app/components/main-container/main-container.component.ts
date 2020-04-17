@@ -34,6 +34,11 @@ export class MainContainerComponent implements OnInit {
       year: momentDate.year(),
     };
 
+    // Continuously looking for event expirations to remove
+    setInterval(() => {
+      this.deleteExpired();
+    }, 1)
+
     // Sample upcomingEvents
     this.allEvents = [
       {
@@ -43,7 +48,7 @@ export class MainContainerComponent implements OnInit {
         ...new Event('fjdsafdsfgsa', 'Event Two', '2020-05-11', '8:30 AM'),
       },
       {
-        ...new Event('fjdsaggshdsa', 'Event Three', '2020-04-17', '12:30 AM'),
+        ...new Event('fjdsaggshdsa', 'Event Three', '2020-04-19', '12:30 AM'),
       },
     ];
 
@@ -127,31 +132,56 @@ export class MainContainerComponent implements OnInit {
   // Filter events and assigns to upcoming events and next event
   filterAndAssign() {
     if (this.allEvents.length !== 0) {
-      let closerEvent: Event = this.allEvents[0];
-      // Executes only when total event count more than one
-      if (this.allEvents.length > 1) {
-        let minDuration = Infinity;
-        this.allEvents.forEach((event) => {
-          const eventDate = moment(
-            `${event.date} ${event.time}`,
-            'YYYY-MM-DD hh:mm a'
-          );
-          const currentDuration = moment
-            .duration(eventDate.diff(moment()))
-            .as('seconds');
-          if (currentDuration < minDuration) {
-            minDuration = currentDuration;
-            closerEvent = event;
-          }
-        });
-      }
+      let closerEvent = this.findClosest(this.upcomingEvents);
 
       this.nextEvent[0] = closerEvent;
       this.upcomingEvents = this.allEvents.filter(
         (event) => closerEvent.id != event.id
       );
+      // this.upcomingEvents = this.sortEvents(this.upcomingEvents);
     } else {
       this.nextEvent = [];
     }
+  }
+
+  // Returns closest event to today
+  findClosest(events: Event[]) {
+    let closerEvent: Event = this.allEvents[0];
+    if (this.allEvents.length > 1) {
+      let minDuration = Infinity;
+      this.allEvents.forEach((event) => {
+        const eventDate = moment(
+          `${event.date} ${event.time}`,
+          'YYYY-MM-DD hh:mm a'
+        );
+        const currentDuration = moment
+          .duration(eventDate.diff(moment()))
+          .as('seconds');
+        if (currentDuration < minDuration) {
+          minDuration = currentDuration;
+          closerEvent = event;
+        }
+      });
+    }
+
+    return closerEvent;
+  }
+
+  // Sort upcoming events
+  sortEvents(events: Event[]) {
+
+  }
+
+  deleteExpired() {
+    this.allEvents.forEach((event) => {
+      const eventDate = moment(
+        `${event.date} ${event.time}`,
+        'YYYY-MM-DD hh:mm a'
+      );
+      
+      if(eventDate.isBefore(moment())) {
+        this.deleteEvent(event);
+      }
+    });
   }
 }
