@@ -95,3 +95,13 @@
     margin: 10px;
     color: rgb(46, 46, 46);
 }
+
+.empty-message {
+    width: 100%;
+    height: auto;
+    background: rgb(252, 252, 252);
+    text-align: center;
+    font-size: 33px;
+    color: #ccc;
+    padding: 20%;
+}

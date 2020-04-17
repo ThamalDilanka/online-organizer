@@ -18,36 +18,19 @@ html {
   margin-bottom: 0 !important;
 }
 
-@media only screen and (max-width: 767px) {
-  .ngb-dp-day {
-    width: 3rem !important;
-    height: 3rem !important;
-  }
-  
-  .ngb-dp-day > div {
-    width: 3rem !important;
-    height: 3rem !important;
-    line-height: 3rem !important;
-  }
-  
-  .ngb-dp-weekday {
-    width: 3rem !important;
-  }
-}
-
 @media only screen and (min-width: 1200px) {
   .ngb-dp-day {
-    width: 3rem !important;
-    height: 3rem !important;
+    width: 2.7em !important;
+    height: 2.7em !important;
   }
-  
+
   .ngb-dp-day > div {
-    width: 3rem !important;
-    height: 3rem !important;
-    line-height: 3rem !important;
+    width: 2.7em !important;
+    height: 2.7em !important;
+    line-height: 2.7em !important;
   }
-  
+
   .ngb-dp-weekday {
-    width: 3rem !important;
+    width: 2.7em !important;
   }
 }

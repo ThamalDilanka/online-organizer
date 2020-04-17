@@ -89,7 +89,7 @@
   </div>
 </div>
 
-<div class="shadow p-3 mb-5 bg-white rounded main-container container-lg">
+<div class="rounded main-container container">
   <br />
   <app-event-input
     [selectedDate]="selectedDate"
@@ -105,12 +105,28 @@
       </div>
     </div>
     <div class="col-md-8">
-      <h5>Events</h5>
-      <app-events
-        [events]="events"
-        (deleteEvent)="deleteEvent($event)"
-        (updateEvent)="updateEventClicked($event)"
-      ></app-events>
+      <div *ngIf="nextEvent[0] !== undefined">
+        <h5>Next Event</h5>
+        <div class="container no-padding">
+          <app-events
+            [events]="nextEvent"
+            (deleteEvent)="deleteEvent($event)"
+            (updateEvent)="updateEventClicked($event)"
+          ></app-events>
+        </div>
+        <br />
+        <h5 *ngIf="upcomingEvents[0] !== undefined">Upcoming Events</h5>
+        <app-events
+          [events]="upcomingEvents"
+          (deleteEvent)="deleteEvent($event)"
+          (updateEvent)="updateEventClicked($event)"
+        ></app-events>
+      </div>
+      <div *ngIf="nextEvent[0] === undefined">
+        <div class="empty-message">
+          <p>No events</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

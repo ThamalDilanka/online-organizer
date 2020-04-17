@@ -22,14 +22,18 @@ export class EventItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    const momentDate = moment(this.event.date, 'YYYY-MM-DD');
+    const momentDate = moment(`${this.event.date} ${this.event.time}`, 'YYYY-MM-DD hh:mm a');
     this.eventDate = momentDate.format('MMMM Do YYYY');
-    this.eventRelativeTime = momentDate.fromNow();
     this.eventMonth = this.eventDate.split(' ')[0];
     this.eventDay = this.eventDate
       .split(' ')[1]
       .slice(0, 2)
       .replace(/[snrt]/g, '');
+
+    // Continuously update the relative time
+    setInterval(() => {
+      this.eventRelativeTime = momentDate.fromNow();
+    }, 1);
   }
 
   onDeletePress() {
@@ -42,6 +46,7 @@ export class EventItemComponent implements OnInit {
 
   onDelete(event: Event) {
     this.deleteEvent.emit(this.event);
+    this.isDeletePressed = false;
   }
 
   onUpdate(event: Event) {
