@@ -28,7 +28,7 @@ export class EventItemComponent implements OnInit {
     this.eventDay = this.eventDate.split(' ')[1].slice(0, 2);;
   }
 
-  onDelete() {
+  onDelete(event: Event) {
     this.deleteEvent.emit(this.event);
   }
 

@@ -1,3 +1,5 @@
+<div>
+  
 <div class="app-event-item-card d-flex bd-highlight">
   <div class="no-padding app-event-item-date-container p-2 bd-highlight">
     <p class="date-number">{{ eventDay }}</p>
@@ -16,57 +18,10 @@
       <i class="fa fa-edit"></i>
     </button>
     <button
+      (click)="onDelete(event)"
       class="event-card-btn-delete event-card-btn btn btn-outline-danger"
-      data-toggle="modal"
-      data-target="#deleteConfirmationModal"
     >
       <i class="fa fa-times"></i>
     </button>
   </div>
 </div>
-
-<!-- Modal Delete -->
-<div
-  class="modal fade"
-  id="deleteConfirmationModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Are you really want to delete "{{ event.title }}" event?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          It's a mistake
-        </button>
-        <button
-          (click)="onDelete()"
-          data-dismiss="modal"
-          type="button"
-          class="btn btn-danger"
-        >
-          Delete
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
