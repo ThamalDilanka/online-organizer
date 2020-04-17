@@ -23,7 +23,7 @@ export class EventItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    const momentDate = moment(this.event.date, 'YYYY.MM.DD')
+    const momentDate = moment(this.event.date, 'YYYY-MM-DD')
     this.eventDate = momentDate.format('MMMM Do YYYY');
     this.eventRelativeTime = momentDate.fromNow();
     this.eventMonth = this.eventDate.split(' ')[0];
@@ -42,9 +42,8 @@ export class EventItemComponent implements OnInit {
     this.deleteEvent.emit(this.event);
   }
 
-  onUpdate() {
-    const updatedEvent = new Event('', '', '', '');
-    this.updateEvent.emit(updatedEvent);
+  onUpdate(event: Event) {
+    this.updateEvent.emit(event);
   }
 
 }

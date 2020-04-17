@@ -9,7 +9,6 @@ import { v4 as uuid } from 'uuid';
   styleUrls: ['./event-input.component.css'],
 })
 export class EventInputComponent implements OnInit {
-
   @Input() selectedDate: DateModal;
   @Output() addNewEvent: EventEmitter<Event> = new EventEmitter();
 
@@ -38,7 +37,11 @@ export class EventInputComponent implements OnInit {
       const newEvent = new Event(
         uuid(),
         this.eventTitle,
-        `${this.selectedDate.year}.${this.selectedDate.month}.${this.selectedDate.day}`,
+        `${this.selectedDate.year}-${
+          this.selectedDate.month < 10
+            ? '0' + this.selectedDate.month
+            : this.selectedDate.month
+        }-${this.selectedDate.day}`,
         `${this.eventHour}:${this.eventMinute} ${this.eventTimeSpan}`
       );
 

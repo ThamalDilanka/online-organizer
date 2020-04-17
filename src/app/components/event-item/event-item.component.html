@@ -19,7 +19,7 @@
       <p class="event-date-time">{{ eventDate }} | {{ event.time }}</p>
       <p class="relative-time">{{ eventRelativeTime }}</p>
       <button
-        (click)="onUpdate()"
+        (click)="onUpdate(event)"
         class="event-card-btn-update event-card-btn btn btn-outline-info"
         data-toggle="modal"
         data-target="#updateEventModal"
