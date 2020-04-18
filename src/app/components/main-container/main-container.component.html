@@ -1,3 +1,52 @@
+<div class="rounded main-container container">
+  <app-event-input
+    [selectedDate]="selectedDate"
+    (addNewEvent)="addNewEvent($event)"
+  ></app-event-input>
+  <div class="row">
+    <div class="calendar-container col-md-4">
+      <h5>{{now}}</h5><hr>
+      <div class="no-padding no-margin calendar-fit">
+        <app-calendar
+          (dateChangeEvent)="onSelectedDateChange($event)"
+        ></app-calendar>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="container">
+        <div *ngIf="nextEvent[0] !== undefined">
+          <h5>Next Event | <span  *ngIf="allEvents.length !== undefined" class="badge badge-pill badge-info">{{nextEventRemaining}}</span></h5><hr>
+          <div class="container no-padding">
+            <app-events
+              [events]="nextEvent"
+              (deleteEvent)="deleteEvent($event)"
+              (updateEvent)="updateEventClicked($event)"
+            ></app-events>
+          </div>
+          <br />
+          <h5 *ngIf="upcomingEvents[0] !== undefined">Upcoming Events | <span *ngIf="upcomingEvents.length !== undefined" class="badge badge-info">{{upcomingEvents.length}}</span></h5>
+          <hr *ngIf="upcomingEvents[0] !== undefined" />
+          <app-events
+            [events]="upcomingEvents"
+            (deleteEvent)="deleteEvent($event)"
+            (updateEvent)="updateEventClicked($event)"
+          ></app-events>
+        </div>
+        <div *ngIf="nextEvent[0] === undefined">
+          <div class="empty-message">
+            <p>You don't have any events yet! Lets add</p>
+            <a>load sample event</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------------------------------------------------- 
+------------------------------ Update Modal -------------------------------------
+--------------------------------------------------------------------------------->
+
 <div *ngIf="isUpdateClicked" no-margin no-padding>
   <div
     (click)="cancelUpdate()"
@@ -85,48 +134,6 @@
       <button (click)="updateTheEvent()" class="btn btn-primary btn-sm">
         Update
       </button>
-    </div>
-  </div>
-</div>
-
-<div class="rounded main-container container">
-  <br />
-  <app-event-input
-    [selectedDate]="selectedDate"
-    (addNewEvent)="addNewEvent($event)"
-  ></app-event-input>
-  <div class="row">
-    <div class="calendar-container col-md-4">
-      <h5>Calendar</h5>
-      <div class="no-padding no-margin calendar-fit">
-        <app-calendar
-          (dateChangeEvent)="onSelectedDateChange($event)"
-        ></app-calendar>
-      </div>
-    </div>
-    <div class="col-md-8">
-      <div *ngIf="nextEvent[0] !== undefined">
-        <h5>Next Event</h5>
-        <div class="container no-padding">
-          <app-events
-            [events]="nextEvent"
-            (deleteEvent)="deleteEvent($event)"
-            (updateEvent)="updateEventClicked($event)"
-          ></app-events>
-        </div>
-        <br />
-        <h5 *ngIf="upcomingEvents[0] !== undefined">Upcoming Events</h5>
-        <app-events
-          [events]="upcomingEvents"
-          (deleteEvent)="deleteEvent($event)"
-          (updateEvent)="updateEventClicked($event)"
-        ></app-events>
-      </div>
-      <div *ngIf="nextEvent[0] === undefined">
-        <div class="empty-message">
-          <p>No events</p>
-        </div>
-      </div>
     </div>
   </div>
 </div>

@@ -1,11 +1,11 @@
-<div class="no-padding container">
-  <div class="input-container d-flex bd-highlight">
+<div class="main-input-container shadow-sm p-3 mb-5 bg-white container">
+  <div class="no-padding input-container d-flex bd-highlight">
     <div class="input-title p-2 flex-grow-1 bd-highlight">
       <input
         [(ngModel)]="eventTitle"
         type="text"
         name="eventTitle"
-        placeholder="Event Title"
+        placeholder="Add new event here"
         maxlength="45"
       />
     </div>
@@ -65,4 +65,5 @@
       <button (click)="onSubmit()" class="btn-add btn btn-primary">+</button>
     </div>
   </div>
+  <p class="error-message">{{error}}</p>
 </div>
