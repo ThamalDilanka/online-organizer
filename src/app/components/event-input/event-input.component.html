@@ -1,16 +1,21 @@
 <div class="main-input-container shadow-sm p-3 mb-5 bg-white container">
   <div class="no-padding input-container d-flex bd-highlight">
     <div class="input-title p-2 flex-grow-1 bd-highlight">
+      <p class="title-label">Event Title</p>
+
       <input
         [(ngModel)]="eventTitle"
         type="text"
         name="eventTitle"
-        placeholder="Add new event on {{selectedDate.day + '.' + selectedDate.month + '.' + selectedDate.year}}"
+        placeholder="Add new event on {{
+          selectedDate.day + '.' + selectedDate.month + '.' + selectedDate.year
+        }}"
         maxlength="45"
       />
     </div>
 
     <div class="no-margin-padding input-hours p-2 bd-highlight">
+      <p class="time-label">Time</p>
       <input
         [(ngModel)]="eventHour"
         type="text"
@@ -21,10 +26,13 @@
     </div>
 
     <div class="no-margin-padding p-2 bd-highlight">
+      <p class="placeholder-label no-margin no-padding"></p>
       <p>:</p>
     </div>
 
     <div class="no-margin-padding input-minutes p-2 bd-highlight">
+      <p class="placeholder-label no-margin no-padding"></p>
+
       <input
         [(ngModel)]="eventMinute"
         type="text"
@@ -35,6 +43,8 @@
     </div>
 
     <div class="no-margin-padding p-2 bd-highlight">
+      <p class="placeholder-label no-margin no-padding"></p>
+
       <div
         class="no-margin-padding time-stamp btn-group btn-group-toggle"
         data-toggle="buttons"
@@ -62,8 +72,9 @@
     </div>
 
     <div class="no-margin-padding input-minutes p-2 bd-highlight">
+      <p class="placeholder-label no-margin no-padding"></p>
       <button (click)="onSubmit()" class="btn-add btn btn-primary">+</button>
     </div>
   </div>
-  <p class="error-message">{{error}}</p>
+  <p class="error-message">{{ error }}</p>
 </div>

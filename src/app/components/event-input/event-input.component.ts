@@ -58,7 +58,6 @@ export class EventInputComponent implements OnInit {
       }`,
       'YYYY-MM-DD hh:mm a'
     );
-    console.log(eventTime);
     if (!this.eventTitle) {
       this.error = 'oops! you forgot to enter the title';
       return false;
@@ -77,7 +76,7 @@ export class EventInputComponent implements OnInit {
         'You entered invalid input for minutes (MM). Please check again';
       return false;
     } else if (eventTime.isBefore(moment())) {
-      this.error = 'You entered past date for the event. Please correct it!';
+      this.error = `You entered past date for the event. You can change the date by calendar` ;
       return false;
     } else {
       this.error = undefined;
