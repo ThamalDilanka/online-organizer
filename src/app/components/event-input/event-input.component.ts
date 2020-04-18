@@ -48,22 +48,35 @@ export class EventInputComponent implements OnInit {
 
   // Input validations
   validateInputs() {
+    const eventTime = moment(
+      `${this.selectedDate.year}-${
+        this.selectedDate.month < 10
+          ? '0' + this.selectedDate.month
+          : this.selectedDate.month
+      }-${this.selectedDate.day} ${this.eventHour}:${this.eventMinute} ${
+        this.eventTimeSpan
+      }`,
+      'YYYY-MM-DD hh:mm a'
+    );
+    console.log(eventTime);
     if (!this.eventTitle) {
       this.error = 'oops! you forgot to enter the title';
       return false;
-    } else if(!(this.eventHour || this.eventMinute)) {
+    } else if (!(this.eventHour || this.eventMinute)) {
       this.error = 'You forgot to enter the time. Please enter the time';
-      return false
-    } else if(isNaN(this.eventHour) || isNaN(this.eventMinute)) {
-      this.error = 'You entered invalid type for the time. Please check again'
       return false;
-    } else if(this.eventHour > 12 || this.eventHour < 1) {
-      this.error = 'You entered invalid input for hour (HH). Please check again';
+    } else if (isNaN(this.eventHour) || isNaN(this.eventMinute)) {
+      this.error = 'You entered invalid type for the time. Please check again';
       return false;
-    } else if(this.eventMinute >= 60  || this.eventMinute < 0) {
-      this.error = 'You entered invalid input for minutes (MM). Please check again';
+    } else if (this.eventHour > 12 || this.eventHour < 1) {
+      this.error =
+        'You entered invalid input for hour (HH). Please check again';
       return false;
-    } else if (moment(`${this.selectedDate.year}-${this.selectedDate.month}-${this.selectedDate.day}`, 'YYYY-MM-DD').isBefore(moment())) {
+    } else if (this.eventMinute >= 60 || this.eventMinute < 0) {
+      this.error =
+        'You entered invalid input for minutes (MM). Please check again';
+      return false;
+    } else if (eventTime.isBefore(moment())) {
       this.error = 'You entered past date for the event. Please correct it!';
       return false;
     } else {
