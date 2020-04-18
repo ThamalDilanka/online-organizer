@@ -98,9 +98,29 @@
 
 .empty-message {
     width: 100%;
-    height: auto;
+    height: 285px;
     background: rgb(245, 245, 245);
     text-align: center;
-    color: #ccc;
-    padding: 20%;
+    color: rgb(138, 138, 138);
+    padding: 50px;
+    margin-top: 40px;
+}
+
+.btn-load-sample:hover {
+    cursor: pointer;
+    background: rgb(9, 95, 110);
+}
+
+.empty-image {
+    width: 200px;
+    margin: 5px;
+    padding: 0;
+    
+}
+
+.error-update {
+    font-size: 10px;
+    color: red;
+    width: 100%;
+    text-align: center;
 }

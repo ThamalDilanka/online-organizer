@@ -24,7 +24,8 @@ export class MainContainerComponent implements OnInit {
   eventToBeUpdatedHH: string; // Event Time Hours
   eventToBeUpdatedTS: string; // Event time span (AM / PM)
   nextEventRemaining: string; // Remaining time to next event
-  now: String; // Current time
+  now: string; // Current time
+  error: string; // Update input errors
 
   constructor() {}
 
@@ -49,8 +50,6 @@ export class MainContainerComponent implements OnInit {
       this.now = moment().format('MMMM Do YYYY, h:mm:ss a');
     }, 1);
 
-    // Sample upcomingEvents
-    this.loadSample();
     this.filterAndAssign();
   }
 
@@ -67,12 +66,7 @@ export class MainContainerComponent implements OnInit {
 
   // Update event (UPDATE)
   updateTheEvent() {
-    if (
-      (this.eventToBeUpdated.title && this.eventToBeUpdatedHH,
-      this.eventToBeUpdatedMM,
-      this.eventToBeUpdatedTS,
-      this.eventToBeUpdated.date)
-    ) {
+    if (this.validateInputs()) {
       const updatedEvent = new Event(
         this.eventToBeUpdated.id,
         this.eventToBeUpdated.title,
@@ -87,12 +81,12 @@ export class MainContainerComponent implements OnInit {
           return event;
         }
       });
-    }
 
-    this.eventToBeUpdated = undefined; // Clear updated cache
-    this.filterAndAssign();
-    this.isUpdateClicked = false;
-    enableScroll();
+      this.eventToBeUpdated = undefined; // Clear updated cache
+      this.filterAndAssign();
+      this.isUpdateClicked = false;
+      enableScroll();
+    }
   }
 
   // Delete event (DELETE)
@@ -185,6 +179,49 @@ export class MainContainerComponent implements OnInit {
     }
   }
 
+  // Input validations
+  validateInputs() {
+    const eventTime = moment(
+      `${getUpdatedDate()} ${this.eventToBeUpdatedHH}:${
+        this.eventToBeUpdatedMM
+      } ${this.eventToBeUpdatedTS}`,
+      'YYYY-MM-DD hh:mm a'
+    );
+    if (!this.eventToBeUpdated.title || this.eventToBeUpdated.title === '') {
+      this.error = 'oops! you forgot to enter the title';
+      return false;
+    } else if (!(this.eventToBeUpdatedHH || this.eventToBeUpdatedMM)) {
+      this.error = 'You forgot to enter the time. Please enter the time';
+      return false;
+    } else if (
+      isNaN(Number.parseInt(this.eventToBeUpdatedHH)) ||
+      isNaN(Number.parseInt(this.eventToBeUpdatedMM))
+    ) {
+      this.error = 'You entered invalid type for the time. Please check again';
+      return false;
+    } else if (
+      Number.parseInt(this.eventToBeUpdatedHH) > 12 ||
+      Number.parseInt(this.eventToBeUpdatedHH) < 1
+    ) {
+      this.error =
+        'You entered invalid input for hour (HH). Please check again';
+      return false;
+    } else if (
+      Number.parseInt(this.eventToBeUpdatedMM) >= 60 ||
+      Number.parseInt(this.eventToBeUpdatedMM) < 0
+    ) {
+      this.error =
+        'You entered invalid input for minutes (MM). Please check again';
+      return false;
+    } else if (eventTime.isBefore(moment())) {
+      this.error = 'You entered past date for the event. Please correct it!';
+      return false;
+    } else {
+      this.error = undefined;
+      return true;
+    }
+  }
+
   // Returns sample events
   loadSample() {
     this.allEvents = [
@@ -192,7 +229,7 @@ export class MainContainerComponent implements OnInit {
         ...new Event(
           uuid(),
           'Office Meeting',
-          moment().add(7, 'days').format('YYYY-MM-DD'),
+          moment().add(1, 'days').format('YYYY-MM-DD'),
           '8:30 AM'
         ),
       },
@@ -213,7 +250,6 @@ export class MainContainerComponent implements OnInit {
         ),
       },
     ];
-
-    console.log(this.allEvents);
+    this.filterAndAssign();
   }
 }

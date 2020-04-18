@@ -10,6 +10,7 @@
         <app-calendar
           (dateChangeEvent)="onSelectedDateChange($event)"
         ></app-calendar>
+        <br><br>
       </div>
     </div>
     <div class="col-md-8">
@@ -34,8 +35,10 @@
         </div>
         <div *ngIf="nextEvent[0] === undefined">
           <div class="empty-message">
-            <p>You don't have any events yet! Lets add</p>
-            <a>load sample event</a>
+            <img src="../../../assets/images/emptybook.png" class="empty-image">
+            <p class="no-margin">You don't have any events yet! Lets add new Event.</p>
+            <p class="no-margin">or</p>
+            <p (click)="loadSample()" ><span class="btn-load-sample badge badge-pill badge-secondary">Click this to load sample events</span></p>
           </div>
         </div>
       </div>
@@ -127,6 +130,7 @@
         </div>
       </div>
     </div>
+    <p class="error-update">{{error}}</p>
     <div class="update-btn-container">
       <button (click)="cancelUpdate()" class="btn btn-secondary btn-sm">
         Discard
