@@ -15,8 +15,8 @@
 .app-event-item-date-container {
     width: 80px;
     text-align: center;
-    background: rgb(8, 190, 190);
     color: #fff;
+    background: rgb(23, 131, 182);
 }
 
 .app-event-item-detail-container {

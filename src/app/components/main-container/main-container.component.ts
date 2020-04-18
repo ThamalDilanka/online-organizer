@@ -138,7 +138,7 @@ export class MainContainerComponent implements OnInit {
       this.upcomingEvents = this.allEvents.filter(
         (event) => closerEvent.id != event.id
       );
-      // this.upcomingEvents = this.sortEvents(this.upcomingEvents);
+      this.upcomingEvents = this.sortEvents(this.upcomingEvents);
     } else {
       this.nextEvent = [];
     }
@@ -167,9 +167,24 @@ export class MainContainerComponent implements OnInit {
     return closerEvent;
   }
 
-  // Sort upcoming events
+  // Sort upcoming events based on duration
   sortEvents(events: Event[]) {
+    let i: number, j: number;
+    const n = events.length;
+    // Bubble sort
+    for(i = 0; i < n - 1; i++) {
+      for(j = 0; j < (n - i - 1); j++) {
+        const jDate =  moment(`${events[j].date} ${events[j].time}`,'YYYY-MM-DD hh:mm a');
+        const jNextDate =  moment(`${events[j+1].date} ${events[j+1].time}`,'YYYY-MM-DD hh:mm a');
+        if(jDate.isAfter(jNextDate)) {
+          const temp: Event = events[j];
+          events[j] = events[j+1];
+          events[j+1] = temp;
+        }
+      }
+    }
 
+    return events;
   }
 
   deleteExpired() {
