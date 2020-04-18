@@ -175,7 +175,7 @@ export class MainContainerComponent implements OnInit {
       this.nextEvent[0] = sortedEvents.shift(); // Remove first element and assign it as next event
       this.upcomingEvents = [...sortedEvents]; // Assign remaining arry to upcoming events
       setInterval(() => {
-        if (this.nextEvent.length[0] !== undefined) {
+        if (typeof this.nextEvent[0] !== 'undefined') {
           this.nextEventRemaining = moment(
             `${this.nextEvent[0].date} ${this.nextEvent[0].time}`,
             'YYYY-MM-DD hh:mm a'

@@ -30,12 +30,7 @@ export class EventInputComponent implements OnInit {
   }
 
   onSubmit() {
-    if (
-      this.eventTitle &&
-      this.eventHour &&
-      this.eventMinute &&
-      this.eventTimeSpan
-    ) {
+    if (this.validateInputs()) {
       const newEvent = new Event(
         uuid(),
         this.eventTitle,
@@ -46,38 +41,34 @@ export class EventInputComponent implements OnInit {
         }-${this.selectedDate.day}`,
         `${this.eventHour}:${this.eventMinute} ${this.eventTimeSpan}`
       );
-
       this.addNewEvent.emit(newEvent);
+      this.error = undefined;
     }
   }
 
   // Input validations
-  validateInputs(event: Event) {
-    if (!event.title) {
+  validateInputs() {
+    if (!this.eventTitle) {
       this.error = 'oops! you forgot to enter the title';
       return false;
-    } else if (moment(event.date, 'YYYY-MM-DD').isBefore(moment())) {
+    } else if(!(this.eventHour || this.eventMinute)) {
+      this.error = 'You forgot to enter the time. Please enter the time';
+      return false
+    } else if(isNaN(this.eventHour) || isNaN(this.eventMinute)) {
+      this.error = 'You entered invalid type for the time. Please check again'
+      return false;
+    } else if(this.eventHour > 12 || this.eventHour < 1) {
+      this.error = 'You entered invalid input for hour (HH). Please check again';
+      return false;
+    } else if(this.eventMinute >= 60  || this.eventMinute < 0) {
+      this.error = 'You entered invalid input for minutes (MM). Please check again';
+      return false;
+    } else if (moment(`${this.selectedDate.year}-${this.selectedDate.month}-${this.selectedDate.day}`, 'YYYY-MM-DD').isBefore(moment())) {
       this.error = 'You entered past date for the event. Please correct it!';
       return false;
     } else {
-      const hour = event.time.split(':')[0];
-      const minutes = event.time.split(':')[2].split(' ')[0];
-      try {
-        if (parseInt(hour) >= 12 || parseInt(hour) <= 0) {
-          this.error =
-            'You entered invalid input for hour (HH). Please check again';
-          return false;
-        } else if (parseInt(minutes) >= 60 || parseInt(minutes) < 0) {
-          this.error =
-            'You entered invalid input for minutes (MM). Please check again';
-          return false;
-        }
-      } catch (err) {
-        this.error =
-          'You entered invalid type of input to the time. Please check again';
-        return false;
-      }
+      this.error = undefined;
+      return true;
     }
-    return true;
   }
 }
