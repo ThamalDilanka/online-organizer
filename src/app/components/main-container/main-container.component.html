@@ -1,22 +1,39 @@
 <div class="rounded main-container container">
+  <!------------------------------------------------------------------------------- 
+--------------------------------- Input -----------------------------------------
+--------------------------------------------------------------------------------->
+
   <app-event-input
     [selectedDate]="selectedDate"
     (addNewEvent)="addNewEvent($event)"
   ></app-event-input>
   <div class="row">
     <div class="calendar-container col-md-4">
-      <h5>{{now}}</h5><hr>
+      <h5>{{ now }}</h5>
+      <hr />
       <div class="no-padding no-margin calendar-fit">
         <app-calendar
           (dateChangeEvent)="onSelectedDateChange($event)"
         ></app-calendar>
-        <br><br>
+        <br /><br />
       </div>
     </div>
     <div class="col-md-8">
       <div class="container">
+        <!------------------------------------------------------------------------------- 
+------------------------------ Next Event ---------------------------------------
+--------------------------------------------------------------------------------->
+
         <div *ngIf="nextEvent[0] !== undefined">
-          <h5>Next Event | <span  *ngIf="allEvents.length !== undefined" class="badge badge-pill badge-info">{{nextEventRemaining}}</span></h5><hr>
+          <h5>
+            Next Event |
+            <span
+              *ngIf="allEvents.length !== undefined"
+              class="badge badge-pill badge-info"
+              >{{ nextEventRemaining }}</span
+            >
+          </h5>
+          <hr />
           <div class="container no-padding">
             <app-events
               [events]="nextEvent"
@@ -25,7 +42,48 @@
             ></app-events>
           </div>
           <br />
-          <h5 *ngIf="upcomingEvents[0] !== undefined">Upcoming Events | <span *ngIf="upcomingEvents.length !== undefined" class="badge badge-info">{{upcomingEvents.length}}</span></h5>
+
+          <!------------------------------------------------------------------------------- 
+------------------------- Selected Day Events -----------------------------------
+--------------------------------------------------------------------------------->
+
+          <h5>
+            Events on {{ this.selectedDate.day }}.{{
+              this.selectedDate.month
+            }}.{{ this.selectedDate.year }} |
+            <span class="badge badge-info">{{ selectedDayEvents.length }}</span>
+          </h5>
+          <hr />
+          <div
+            *ngIf="selectedDayEvents[0] === undefined"
+            class="empty-today-events-container"
+          >
+            <p class="empty-day-event-message">
+              You don't have any event on {{ this.selectedDate.day }}.{{
+                this.selectedDate.month
+              }}.{{ this.selectedDate.year }}
+            </p>
+          </div>
+          <app-events
+            *ngIf="selectedDayEvents[0] !== undefined"
+            [events]="selectedDayEvents"
+            (deleteEvent)="deleteEvent($event)"
+            (updateEvent)="updateEventClicked($event)"
+          ></app-events>
+          <br />
+
+          <!------------------------------------------------------------------------------- 
+---------------------------- Upcoming Events ------------------------------------
+--------------------------------------------------------------------------------->
+
+          <h5 *ngIf="upcomingEvents[0] !== undefined">
+            Upcoming Events |
+            <span
+              *ngIf="upcomingEvents.length !== undefined"
+              class="badge badge-info"
+              >{{ upcomingEvents.length }}</span
+            >
+          </h5>
           <hr *ngIf="upcomingEvents[0] !== undefined" />
           <app-events
             [events]="upcomingEvents"
@@ -33,12 +91,26 @@
             (updateEvent)="updateEventClicked($event)"
           ></app-events>
         </div>
+
+        <!------------------------------------------------------------------------------- 
+------------------------ Empty event placeholder --------------------------------
+--------------------------------------------------------------------------------->
+
         <div *ngIf="nextEvent[0] === undefined">
           <div class="empty-message">
-            <img src="https://i.ibb.co/dKLPTzJ/emptybook.png" class="empty-image">
-            <p class="no-margin">You don't have any events yet! Lets add new Event.</p>
+            <img
+              src="https://i.ibb.co/dKLPTzJ/emptybook.png"
+              class="empty-image"
+            />
+            <p class="no-margin">
+              You don't have any events yet! Lets add new Event.
+            </p>
             <p class="no-margin">or</p>
-            <p (click)="loadSample()" ><span class="btn-load-sample badge badge-pill badge-secondary">Click this to load sample events</span></p>
+            <p (click)="loadSample()">
+              <span class="btn-load-sample badge badge-pill badge-secondary"
+                >Click this to load sample events</span
+              >
+            </p>
           </div>
         </div>
       </div>
@@ -130,7 +202,7 @@
         </div>
       </div>
     </div>
-    <p class="error-update">{{error}}</p>
+    <p class="error-update">{{ error }}</p>
     <div class="update-btn-container">
       <button (click)="cancelUpdate()" class="btn btn-secondary btn-sm">
         Discard

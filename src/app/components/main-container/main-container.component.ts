@@ -18,6 +18,7 @@ export class MainContainerComponent implements OnInit {
   allEvents: Event[] = []; // Contains all the events including next and upcoming events
   upcomingEvents: Event[] = []; // All the upcomingEvents contains here except next event
   nextEvent: Event[] = []; // The next event contains here
+  selectedDayEvents: Event[] = []; // Events that are in the selected date of the calendar
   isUpdateClicked: boolean; // Keep state of update button click of any event item component
   eventToBeUpdated: Event; // Modifying event object
   eventToBeUpdatedMM: string; // Event Time Minutes
@@ -50,12 +51,14 @@ export class MainContainerComponent implements OnInit {
       this.now = moment().format('MMMM Do YYYY, h:mm:ss a');
     }, 1);
 
+    this.loadSample();
     this.filterAndAssign();
   }
 
   // Update the selected date when user click on calender component
   onSelectedDateChange($event) {
     this.selectedDate = $event;
+    this.filterAndAssign();
   }
 
   // Adding new event to the list (CREATE)
@@ -167,7 +170,23 @@ export class MainContainerComponent implements OnInit {
     if (this.allEvents.length !== undefined) {
       const sortedEvents = [...this.sortEvents(this.allEvents)];
       this.nextEvent[0] = sortedEvents.shift(); // Remove first element and assign it as next event
-      this.upcomingEvents = [...sortedEvents]; // Assign remaining arry to upcoming events
+
+      // Updating selected day events
+      this.selectedDayEvents = sortedEvents.filter((e) =>
+        moment(
+          `${this.selectedDate.year}-${this.selectedDate.month}-${this.selectedDate.day}`
+        ).isSame(e.date)
+      );
+
+      // Updating upcoming events
+      this.upcomingEvents = sortedEvents.filter(
+        (e) =>
+          !moment(
+            `${this.selectedDate.year}-${this.selectedDate.month}-${this.selectedDate.day}`
+          ).isSame(e.date)
+      );
+
+      // Updating relative time of each component continuously
       setInterval(() => {
         if (typeof this.nextEvent[0] !== 'undefined') {
           this.nextEventRemaining = moment(

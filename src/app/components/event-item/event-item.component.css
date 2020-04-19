@@ -1,98 +1,102 @@
-.app-event-item-card p, h1, h2, h3, h4{
-    margin: 0;
-    padding: 0;
-} 
+.app-event-item-card p,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
+}
 
 .app-event-item-card {
-    width: 100%;
-    max-width: 750px;
-    height: 80px;
-    position: relative;
-    border: 1px rgb(218, 218, 218) solid;
-    margin: 0 0 5px 0;
-} 
+  width: 100%;
+  max-width: 750px;
+  height: 80px;
+  position: relative;
+  border: 1px rgb(218, 218, 218) solid;
+  margin: 0 0 5px 0;
+}
 
 .app-event-item-date-container {
-    width: 80px;
-    text-align: center;
-    color: #fff;
-    background: rgb(23, 131, 182);
+  width: 80px;
+  text-align: center;
+  color: #fff;
+  background: rgb(23, 131, 182);
 }
 
 .app-event-item-detail-container {
-    background: rgb(248, 248, 248);
+  background: rgb(248, 248, 248);
 }
 
 .date-number {
-    font-size: 35px;
-    line-height: 38px;
-    margin-top: 10px !important;
+  font-size: 35px;
+  line-height: 38px;
+  margin-top: 10px !important;
 }
 
 .event-title {
-    font-size: 22px;
-    line-height: 26px;
-    font-weight: 600;
-    color: rgb(68, 68, 68);
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 600;
+  color: rgb(68, 68, 68);
 }
 
 .event-date-time {
-    color: rgb(63, 63, 63);
-    font-size: 16px;
-    line-height: 20px;
+  color: rgb(63, 63, 63);
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .relative-time {
-    color: rgb(158, 158, 158);
-    font-size: 12px;
+  color: rgb(158, 158, 158);
+  font-size: 12px;
 }
 
 .event-card-btn {
-    width: 30px;
-    height: 30px;
-    padding: 0;
-    margin: 0;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 8px;
-    font-size: 12px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 8px;
+  font-size: 12px;
 }
 
 .event-card-btn-update {
-    right: 45px;
+  right: 45px;
 }
 
 .event-card-btn-delete {
-    right: 8px;
+  right: 8px;
 }
 
 .on-delete-background {
-    width: 100%;
-    height: 100%;
-    background: rgb(17, 17, 17);
-    opacity: 0.8;
-    z-index: 100;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 1px red solid;
+  width: 100%;
+  height: 100%;
+  background: rgb(17, 17, 17);
+  opacity: 0.8;
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px red solid;
 }
 
 .on-delete-dialog {
-    width: 100%;
-    height: 100%;
-    z-index: 120;
-    color: #fff;
-    position: absolute;
-    top: 0;
-    left: 0;
-    text-align: center;
+  width: 100%;
+  height: 100%;
+  z-index: 120;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
 }
 
 .on-delete-dialog p {
-    padding: 6px;
+  padding: 6px;
 }
 
 .on-delete-dialog button {
-    margin: 0 3px;
+  margin: 0 3px;
 }
