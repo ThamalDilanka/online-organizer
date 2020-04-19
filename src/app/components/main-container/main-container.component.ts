@@ -51,7 +51,6 @@ export class MainContainerComponent implements OnInit {
       this.now = moment().format('MMMM Do YYYY, h:mm:ss a');
     }, 1);
 
-    this.loadSample();
     this.filterAndAssign();
   }
 
@@ -174,7 +173,8 @@ export class MainContainerComponent implements OnInit {
       // Updating selected day events
       this.selectedDayEvents = sortedEvents.filter((e) =>
         moment(
-          `${this.selectedDate.year}-${this.selectedDate.month}-${this.selectedDate.day}`
+          `${this.selectedDate.year}-${this.selectedDate.month}-${this.selectedDate.day}`,
+          'YYYY-MM-DD'
         ).isSame(e.date)
       );
 
@@ -182,7 +182,8 @@ export class MainContainerComponent implements OnInit {
       this.upcomingEvents = sortedEvents.filter(
         (e) =>
           !moment(
-            `${this.selectedDate.year}-${this.selectedDate.month}-${this.selectedDate.day}`
+            `${this.selectedDate.year}-${this.selectedDate.month}-${this.selectedDate.day}`,
+            'YYYY-MM-DD'
           ).isSame(e.date)
       );
 
