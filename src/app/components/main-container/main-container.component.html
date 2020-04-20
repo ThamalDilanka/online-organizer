@@ -51,14 +51,24 @@
             Events on {{ this.selectedDate.day }}.{{
               this.selectedDate.month
             }}.{{ this.selectedDate.year }} |
-            <span class="badge badge-info">{{ selectedDayEvents.length }}</span>
+            <span *ngIf="this.nextEventIsToday" class="badge badge-info"
+              >{{selectedDayEvents.length + 1}}</span
+            >
+            <span *ngIf="!this.nextEventIsToday" class="badge badge-info">{{
+              selectedDayEvents.length
+            }}</span>
           </h5>
           <hr />
           <div
             *ngIf="selectedDayEvents[0] === undefined"
             class="empty-today-events-container"
           >
-            <p class="empty-day-event-message">
+            <p *ngIf="this.nextEventIsToday" class="empty-day-event-message">
+              The next event is scheduled today. You don't have any other
+              events.
+            </p>
+
+            <p *ngIf="!this.nextEventIsToday" class="empty-day-event-message">
               You don't have any event on {{ this.selectedDate.day }}.{{
                 this.selectedDate.month
               }}.{{ this.selectedDate.year }}
