@@ -21,8 +21,8 @@
 }
 
 .update-form-container {
-  width: 500px;
-  max-width: 800px;
+  width: 100%;
+  max-width: 500px;
   height: 300px;
   z-index: 140;
   position: fixed;

@@ -179,7 +179,7 @@ export class MainContainerComponent implements OnInit {
         ).isSame(e.date)
       );
 
-      if(this.nextEvent[0].date === moment().format('YYYY-MM-DD')){
+      if(typeof this.nextEvent[0] !== 'undefined' && this.nextEvent[0].date === moment().format('YYYY-MM-DD')){
         this.nextEventIsToday = true;
       } else {
         this.nextEventIsToday = false;
