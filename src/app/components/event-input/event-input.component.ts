@@ -41,8 +41,16 @@ export class EventInputComponent implements OnInit {
         }-${this.selectedDate.day}`,
         `${this.eventHour}:${this.eventMinute} ${this.eventTimeSpan}`
       );
+
+      // Emit the add event
       this.addNewEvent.emit(newEvent);
+
+      // Reset input fields
       this.error = undefined;
+      this.eventTitle = '';
+      this.eventHour = undefined;
+      this.eventMinute = undefined;
+      this.eventTimeSpan = 'AM';
     }
   }
 
@@ -76,7 +84,7 @@ export class EventInputComponent implements OnInit {
         'You entered invalid input for minutes (MM). Please check again';
       return false;
     } else if (eventTime.isBefore(moment())) {
-      this.error = `You entered past date for the event. You can change the date by calendar` ;
+      this.error = `You entered past date for the event. You can change the date by calendar`;
       return false;
     } else {
       this.error = undefined;
