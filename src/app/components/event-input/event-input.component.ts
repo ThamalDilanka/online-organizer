@@ -50,7 +50,6 @@ export class EventInputComponent implements OnInit {
       this.eventTitle = '';
       this.eventHour = undefined;
       this.eventMinute = undefined;
-      this.eventTimeSpan = 'AM';
     }
   }
 
