@@ -25,7 +25,6 @@ export class MainContainerComponent implements OnInit {
   eventToBeUpdatedHH: string; // Event Time Hours
   eventToBeUpdatedTS: string; // Event time span (AM / PM)
   nextEventRemaining: string; // Remaining time to next event
-  nextEventIsToday: boolean; // Store whether next event is today or not
   now: string; // Current time
   error: string; // Update input errors
 
@@ -178,12 +177,6 @@ export class MainContainerComponent implements OnInit {
           'YYYY-MM-DD'
         ).isSame(e.date)
       );
-
-      if(typeof this.nextEvent[0] !== 'undefined' && this.nextEvent[0].date === moment().format('YYYY-MM-DD')){
-        this.nextEventIsToday = true;
-      } else {
-        this.nextEventIsToday = false;
-      }
 
       // Updating upcoming events
       this.upcomingEvents = sortedEvents.filter(
